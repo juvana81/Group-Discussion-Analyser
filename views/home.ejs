@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Discussion Analysis App</title>
+  <style>
+    :root {
+      --purple-dark: #4a148c;
+      --purple-main: #6a1b9a;
+      --purple-light: #9c27b0;
+      --purple-accent: #ce93d8;
+      --black: #212121;
+      --dark-gray: #333333;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light-gray);
+      color: var(--black);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-main));
+      color: var(--white);
+      padding: 3rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    h2 {
+      color: var(--purple-main);
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    
+    h3 {
+      color: var(--purple-main);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+    
+    .card {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid var(--purple-main);
+    }
+    
+    ul, ol {
+      padding-left: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    
+    li {
+      margin-bottom: 0.8rem;
+      font-size: 1.05rem;
+    }
+    
+    .setup-container {
+      background-color: rgba(156, 39, 176, 0.05);
+      padding: 2rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--dark-gray);
+      font-weight: 500;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    input[type="text"]:focus {
+      border-color: var(--purple-light);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+    }
+    
+    .btn {
+      background-color: var(--purple-main);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn:hover {
+      background-color: var(--purple-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-large {
+      width: 100%;
+      padding: 1.2rem;
+    }
+    
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        padding: 1.8rem;
+      }
+      
+      .setup-container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Group Discussion Analysis</h1>
+      <p>Record, transcribe, and analyze your group discussions</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Welcome to the Group Discussion Analysis Tool</h2>
+      <p>This application helps you improve your participation in group discussions by:</p>
+      <ul>
+        <li>Recording your speech during discussions</li>
+        <li>Transcribing your speech with advanced AI</li>
+        <li>Analyzing your arguments, grammar, and factual accuracy</li>
+        <li>Providing suggestions to improve your points</li>
+      </ul>
+      
+      <div class="setup-container">
+        <h3>Get Started</h3>
+        <form action="/discussion" method="GET">
+          <div class="form-group">
+            <label for="participantName">Your Name:</label>
+            <input type="text" id="participantName" name="participantName" required placeholder="Enter your name">
+          </div>
+          
+          <button type="submit" class="btn btn-large">Start Discussion</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>How It Works</h3>
+      <ol>
+        <li>Join a Google Meet discussion with up to 5 participants</li>
+        <li>Record your speech during the discussion</li>
+        <li>Upload your recording for AI analysis</li>
+        <li>Review your personalized feedback and suggestions</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Group Discussion Analysis Tool</p>
+    </div>
+  </footer>
+</body>
+</html>

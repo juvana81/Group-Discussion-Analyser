@@ -1,0 +1,32 @@
+{
+    "name": "group-discussion-app",
+    "version": "1.0.0",
+    "description": "An application for recording, transcribing, and analyzing group discussions",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+        
+    },
+
+    
+    "dependencies": {
+        "@mistralai/mistralai": "^1.5.2",
+        "axios": "^1.8.4",
+        "body-parser": "^1.20.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "googleapis": "^148.0.0",
+        "helmet": "^8.1.0",
+        "multer": "^1.4.5-lts.1",
+        "opn": "^5.5.0",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}

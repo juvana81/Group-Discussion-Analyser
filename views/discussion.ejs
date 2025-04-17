@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Discussion Room - Group Analysis App</title>
+  <style>
+    :root {
+      --purple-dark: #4a148c;
+      --purple-main: #6a1b9a;
+      --purple-light: #9c27b0;
+      --purple-accent: #ce93d8;
+      --black: #212121;
+      --dark-gray: #333333;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+    }
+    
+    body {
+      background-color: var(--light-gray);
+      color: var(--black);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple-main));
+      color: var(--white);
+      padding: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    
+
+    .participant-id-section {
+  background-color: #4b0082; /* deep purple */
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.participant-id-section h3 {
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.participant-id-section input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 60%;
+  max-width: 400px;
+  background-color: #fff;
+  color: #4b0082;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.participant-id-section input:focus {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    h2 {
+      color: var(--purple-main);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    
+    h3 {
+      color: var(--purple-main);
+      margin-bottom: 1rem;
+    }
+    
+    .card {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      border-top: 4px solid var(--purple-main);
+    }
+    
+    .btn {
+      background-color: var(--purple-main);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      background-color: var(--purple-dark);
+      transform: translateY(-2px);
+    }
+    
+    .btn:disabled {
+      background-color: var(--light-gray);
+      color: var(--dark-gray);
+      cursor: not-allowed;
+    }
+    
+    .btn-large {
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+    
+    .form-group {
+      margin: 1.5rem 0;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--dark-gray);
+      font-weight: 500;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+    
+    input[type="text"]:focus {
+      border-color: var(--purple-light);
+      outline: none;
+    }
+    
+    .meet-link {
+      background-color: var(--light-gray);
+      padding: 1rem;
+      border-radius: 5px;
+      margin: 1rem 0;
+      word-break: break-all;
+    }
+    
+    .meet-link a {
+      color: var(--purple-main);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .meet-link a:hover {
+      text-decoration: underline;
+    }
+    
+    #recordButton {
+      background-color: #6a1b9a;
+    }
+    
+    #recordButton.recording {
+      background-color: #d32f2f;
+    }
+    
+    #uploadBtn {
+      background-color: #333333;
+    }
+    
+    #uploadBtn:hover {
+      background-color: #000000;
+    }
+    
+    #audioPreview {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    audio {
+      width: 100%;
+      border-radius: 30px;
+    }
+    
+    #statusMessage {
+      color: var(--purple-main);
+      font-weight: 500;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    #feedbackCard {
+      border-top: 4px solid var(--purple-light);
+    }
+    
+    #feedbackText {
+      background-color: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      line-height: 1.8;
+    }
+    
+    ol {
+      padding-left: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: 0.8rem;
+    }
+    
+    footer {
+      background-color: var(--black);
+      color: var(--white);
+      padding: 1.5rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .btn-large {
+        padding: 0.8rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Group Discussion</h1>
+      <p>Participate, record, and get AI feedback</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Google Meet Section -->
+    <div class="container">
+      <!-- Participant ID once at the top -->
+      <div class="participant-id-section">
+        <h3>Enter your Participant ID:</h3>
+        <input type="text" id="participantId" name="participantId" placeholder="Enter your name or roll number">
+      </div>
+    
+      <!-- Loop through discussions -->
+      <% discussions.forEach((discussion) => { %>
+        <div class="card meet-container">
+          <h2>Join Discussion</h2>
+          <h2><%= discussion.title %></h2>
+          <p><%= discussion.description %></p>
+          <p>Use the link below to join the Google Meet discussion:</p>
+    
+          <div class="meet-link">
+            <a href="<%= discussion.meetLink %>" target="_blank"><%= discussion.meetLink %></a>
+          </div>
+    
+          <button class="btn btn-large" onclick="joinMeeting('<%= discussion.meetLink %>')">Join Google Meet</button>
+        </div>
+      <% }); %>
+    </div>
+    
+    
+    <!-- Recording Section -->
+    <div class="card recording-container">
+      <h2>Voice Recording</h2>
+      <p>Test microphone and submit your answer for AI analysis.</p>
+      
+      <button id="recordButton" class="btn btn-large">Start Recording</button>
+      <button id="uploadBtn" class="btn btn-large" disabled>Upload Recording for AI Feedback</button>
+
+      <div id="audioPreview" style="margin-top: 15px;"></div>
+
+      <!-- Optional loading indicator -->
+      <div id="statusMessage"></div>
+    </div>
+
+    <!-- Feedback Output Section -->
+    <div class="card" id="feedbackCard" style="display: none;">
+      <h2>🧠 AI Feedback</h2>
+      <p id="feedbackText"></p>
+    </div>
+
+    <!-- Instructions -->
+    <div class="card">
+      <h3>Instructions</h3>
+      <ol>
+        <li>Enter your name or unique ID above</li>
+        <li>Join the Google Meet and participate in the discussion</li>
+        <li>Click "Start Recording" when it's your turn to speak</li>
+        <li>Click "Stop Recording" to finish</li>
+        <li>Click "Upload" to get feedback</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Group Discussion Analysis Tool</p>
+    </div>
+  </footer>
+
+  <script>
+
+
+function joinMeeting(link) {
+    window.open(link, '_blank');
+  }
+
+  function joinMeeting(link) {
+    const participantId = document.getElementById('participantId').value;
+    if (!participantId) {
+      alert('Please enter your Participant ID before joining.');
+      return;
+    }
+
+    // You could optionally log it or send it to the backend
+    console.log(`Participant: ${participantId} is joining: ${link}`);
+
+    // Open the Meet link
+    window.open(link, '_blank');
+  }
+
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+
+    const recordButton = document.getElementById('recordButton');
+    const uploadButton = document.getElementById('uploadBtn');
+    const audioPreview = document.getElementById('audioPreview');
+    const statusMessage = document.getElementById('statusMessage');
+    const feedbackCard = document.getElementById('feedbackCard');
+    const feedbackText = document.getElementById('feedbackText');
+
+    recordButton.addEventListener('click', async () => {
+      if (!isRecording) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          audioChunks = [];
+
+          mediaRecorder.ondataavailable = event => {
+            if (event.data.size > 0) {
+              audioChunks.push(event.data);
+            }
+          };
+
+          mediaRecorder.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+
+            // Preview
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            audio.src = audioUrl;
+
+            audioPreview.innerHTML = '';
+            audioPreview.appendChild(audio);
+
+            uploadButton.disabled = false;
+
+            uploadButton.onclick = () => uploadAudio(audioBlob);
+          };
+
+          mediaRecorder.start();
+          isRecording = true;
+          recordButton.textContent = 'Stop Recording';
+          recordButton.classList.add('recording');
+          statusMessage.textContent = '🎙️ Recording...';
+        } catch (err) {
+          alert('🎤 Microphone access denied or unavailable.');
+          console.error(err);
+        }
+      } else {
+        mediaRecorder.stop();
+        isRecording = false;
+        recordButton.textContent = 'Start Recording';
+        recordButton.classList.remove('recording');
+        statusMessage.textContent = 'Recording stopped.';
+      }
+    });
+
+    async function uploadAudio(blob) {
+      const participantId = document.getElementById('participantId').value.trim();
+      if (!participantId) {
+        alert('⚠️ Please enter your Participant ID.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('audio', blob, 'recording.webm');
+      formData.append('participantId', participantId);
+
+      uploadButton.disabled = true;
+      uploadButton.textContent = 'Uploading...';
+      statusMessage.textContent = '⏳ Uploading audio & waiting for AI feedback...';
+
+      try {
+        const res = await fetch('/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await res.json();
+
+        if (result.feedback) {
+          feedbackText.textContent = result.feedback;
+          feedbackCard.style.display = 'block';
+          statusMessage.textContent = '✅ Feedback received!';
+        } else {
+          throw new Error('No feedback returned');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('❌ Error uploading audio or getting feedback.');
+        statusMessage.textContent = '❌ Something went wrong.';
+      } finally {
+        uploadButton.textContent = 'Upload Recording for AI Feedback';
+        uploadButton.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
